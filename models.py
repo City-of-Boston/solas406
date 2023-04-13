@@ -1,12 +1,9 @@
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 from datetime import datetime
-from flask_login import UserMixin
-from flask_login import LoginManager
 from flask_marshmallow import Marshmallow 
 
 # set variables for class instantiation
-login_manager = LoginManager()
 ma = Marshmallow()
 db = SQLAlchemy()
 
@@ -22,3 +19,10 @@ class CalenderEvent(db.Model):
     def __repr__(self):
         return f'User {self.event} has been added to the database'
 
+
+class EventSchema(ma.Schema):
+    class Meta:
+        fields = ['id', 'title', 'author', 'publisher', 'isbn']
+
+event_schema = EventSchema()
+events_schema = EventSchema(many = True)
